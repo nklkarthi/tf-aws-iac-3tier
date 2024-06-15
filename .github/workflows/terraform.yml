@@ -95,4 +95,4 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Output
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform Output
+      run: terraform output
