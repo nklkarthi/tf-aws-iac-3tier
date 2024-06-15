@@ -87,3 +87,13 @@ variable "parameter_group_name" {
   description = "The DB parameter group name."
   type        = string
 }
+
+variable "private_subnet_ids" {
+  description = "List of private subnet IDs."
+  type        = list(string)
+}
+
+variable "rds_sg_id" {
+  description = "The security group ID for RDS."
+  type        = string
+}
