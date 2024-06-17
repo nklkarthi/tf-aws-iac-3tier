@@ -87,3 +87,73 @@ variable "parameter_group_name" {
   description = "The DB parameter group name."
   type        = string
 }
+
+variable "project_name" {
+  description = "The name of the CodeBuild project."
+  type        = string
+}
+
+variable "database_password" {
+  description = "Database password stored in AWS Secrets Manager."
+  type        = string
+}
+
+variable "source_repo" {
+  description = "The source repository for the build."
+  type        = string
+}
+
+variable "pipeline_name" {
+  description = "The name of the CodePipeline."
+  type        = string
+}
+
+variable "artifact_store_location" {
+  description = "The S3 bucket for storing artifacts."
+  type        = string
+}
+
+variable "github_owner" {
+  description = "The GitHub owner."
+  type        = string
+}
+
+variable "github_repo" {
+  description = "The GitHub repository."
+  type        = string
+}
+
+variable "github_branch" {
+  description = "The branch of the GitHub repository."
+  type        = string
+}
+
+variable "github_token" {
+  description = "The GitHub OAuth token."
+  type        = string
+}
+
+variable "application_name" {
+  description = "The name of the CodeDeploy application."
+  type        = string
+}
+
+variable "deployment_group_name" {
+  description = "The name of the CodeDeploy deployment group."
+  type        = string
+}
+
+variable "ec2_tag_key" {
+  description = "The tag key to identify EC2 instances for deployment."
+  type        = string
+}
+
+variable "ec2_tag_value" {
+  description = "The tag value to identify EC2 instances for deployment."
+  type        = string
+}
+
+variable "bucket_name" {
+  description = "The name of the S3 bucket."
+  type        = string
+}

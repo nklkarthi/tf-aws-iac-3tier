@@ -13,9 +13,9 @@ resource "aws_codedeploy_deployment_group" "deployment_group" {
   }
 
   ec2_tag_filter {
-    key = var.ec2_tag_key
+    key   = var.ec2_tag_key
     value = var.ec2_tag_value
-    type = "KEY_AND_VALUE"
+    type  = "KEY_AND_VALUE"
   }
 
   load_balancer_info {

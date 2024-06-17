@@ -16,7 +16,7 @@ module "ec2" {
   instance_type           = var.instance_type
   frontend_instance_count = var.frontend_instance_count
   backend_instance_count  = var.backend_instance_count
-
+  private_subnets         = var.private_subnets
 }
 
 module "alb" {
@@ -41,6 +41,50 @@ module "rds" {
   rds_sg_id            = module.ec2.backend_sg_id
 }
 
-module "kms" {
-  source = "./modules/kms"
+module "iam" {
+  source = "./modules/iam"
+}
+
+module "s3" {
+  source      = "./modules/s3"
+  bucket_name = var.bucket_name
+}
+
+module "ecr" {
+  source = "./modules/ecr"
+}
+
+# CodeBuild project
+module "codebuild" {
+  source            = "./modules/codebuild"
+  project_name      = var.project_name
+  database_password = var.database_password
+  source_repo       = var.source_repo
+  service_role_arn  = module.iam.codebuild_role_arn
+}
+
+# CodePipeline
+module "codepipeline" {
+  source                  = "./modules/codepipeline"
+  pipeline_name           = var.pipeline_name
+  service_role_arn        = module.iam.codepipeline_role_arn
+  artifact_store_location = module.s3.bucket_name
+  github_owner            = var.github_owner
+  github_repo             = var.github_repo
+  github_branch           = var.github_branch
+  github_token            = var.github_token
+  build_project_name      = module.codebuild.project_name
+  application_name        = var.application_name
+  deployment_group_name   = var.deployment_group_name
+}
+
+# CodeDeploy application and deployment group
+module "codedeploy" {
+  source                = "./modules/codedeploy"
+  application_name      = module.codepipeline.pipeline_name
+  deployment_group_name = var.deployment_group_name
+  service_role_arn      = module.iam.codedeploy_role_arn
+  ec2_tag_key           = var.ec2_tag_key
+  ec2_tag_value         = var.ec2_tag_value
+  target_group_name     = module.alb.alb_dns_name
 }

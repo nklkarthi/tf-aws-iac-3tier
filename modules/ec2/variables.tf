@@ -32,3 +32,8 @@ variable "backend_instance_count" {
   description = "Number of backend instances."
   type        = number
 }
+
+variable "private_subnets" {
+  description = "List of private subnet CIDR blocks."
+  type        = list(string)
+}
