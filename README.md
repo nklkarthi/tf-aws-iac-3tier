@@ -32,7 +32,7 @@
     provider.tf
 
 
-To use this repository, you will need 
+*To use this repository, you will need*
 
     AWS Account
     Terraform Client (1.8.5)
@@ -40,5 +40,8 @@ To use this repository, you will need
     Terraform Cloud account with Token.
     Github account with PAT.
     All the required variables/secrets are defined in the Teraform Cloud.
+
+*Github actions*
+    Terraform workflow are invoked by the Github Flow
 
 
