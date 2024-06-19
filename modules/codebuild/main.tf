@@ -27,6 +27,7 @@ resource "aws_codebuild_project" "project" {
   }
 
   cache {
-    type = "LOCAL"
+    type  = "LOCAL"
+    modes = ["LOCAL_SOURCE_CACHE", "LOCAL_DOCKER_LAYER_CACHE"]
   }
 }
