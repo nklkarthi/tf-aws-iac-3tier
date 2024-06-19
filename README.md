@@ -1,5 +1,5 @@
 # tf-aws-iac-3tier
-## Terraform AWS IAC
+## Terraform AWS IAC for [motoshop](https://github.com/nklkarthi/motoShop) Application
 
 *Terraform configuration files for provisioning infrastructure*
 
