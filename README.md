@@ -39,5 +39,6 @@ To use this repository, you will need
     AWS CLI (Latest version)
     Terraform Cloud account with Token.
     Github account with PAT.
+    All the required variables/secrets are defined in the Teraform Cloud.
 
 
