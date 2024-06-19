@@ -42,6 +42,7 @@
     All the required variables/secrets are defined in the Teraform Cloud.
 
 *Github actions*
+    
     Terraform workflow are invoked by the Github Flow
 
 
