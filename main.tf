@@ -41,6 +41,10 @@ module "rds" {
   rds_sg_id            = module.ec2.backend_sg_id
 }
 
+module "kms" {
+  source = "./modules/kms"
+}
+
 module "iam" {
   source = "./modules/iam"
 }
@@ -54,7 +58,6 @@ module "ecr" {
   source = "./modules/ecr"
 }
 
-# CodeBuild project
 module "codebuild" {
   source            = "./modules/codebuild"
   project_name      = var.project_name
@@ -63,7 +66,6 @@ module "codebuild" {
   service_role_arn  = module.iam.codebuild_role_arn
 }
 
-# CodePipeline
 module "codepipeline" {
   source                  = "./modules/codepipeline"
   pipeline_name           = var.pipeline_name
@@ -78,13 +80,12 @@ module "codepipeline" {
   deployment_group_name   = var.deployment_group_name
 }
 
-# CodeDeploy application and deployment group
 module "codedeploy" {
   source                = "./modules/codedeploy"
-  application_name      = module.codepipeline.pipeline_name
+  application_name      = var.application_name
   deployment_group_name = var.deployment_group_name
   service_role_arn      = module.iam.codedeploy_role_arn
   ec2_tag_key           = var.ec2_tag_key
   ec2_tag_value         = var.ec2_tag_value
-  target_group_name     = module.alb.alb_dns_name
+  target_group_name     = module.alb.frontend_tg_name
 }

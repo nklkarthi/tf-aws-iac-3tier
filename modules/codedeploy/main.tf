@@ -20,7 +20,7 @@ resource "aws_codedeploy_deployment_group" "deployment_group" {
 
   load_balancer_info {
     target_group_info {
-      name = var.target_group_name
+      name = aws_lb_target_group.frontend.name
     }
   }
 }
