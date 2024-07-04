@@ -80,12 +80,13 @@ module "codepipeline" {
   deployment_group_name   = var.deployment_group_name
 }
 
-module "codedeploy" {
-  source                = "./modules/codedeploy"
-  application_name      = var.application_name
-  deployment_group_name = var.deployment_group_name
-  service_role_arn      = module.iam.codedeploy_role_arn
-  ec2_tag_key           = var.ec2_tag_key
-  ec2_tag_value         = var.ec2_tag_value
-  target_group_name     = module.alb.frontend_tg_name
-}
+# module "codedeploy" {
+#   source                = "./modules/codedeploy"
+#   application_name      = var.application_name
+#   deployment_group_name = var.deployment_group_name
+#   service_role_arn      = module.iam.codedeploy_role_arn
+#   ec2_tag_key           = var.ec2_tag_key
+#   ec2_tag_value         = var.ec2_tag_value
+#   target_group_arn      = module.alb.target_group_arn
+#   alb_name              = module.alb.alb_dns_name
+# }

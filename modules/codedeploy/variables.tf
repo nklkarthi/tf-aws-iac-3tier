@@ -23,7 +23,13 @@ variable "ec2_tag_value" {
   type        = string
 }
 
-variable "target_group_name" {
-  description = "The name of the ALB target group."
+variable "target_group_arn" {
+  description = "The ARN of the ALB target group."
   type        = string
+}
+
+variable "alb_name" {
+  description = "The name of the ALB."
+  type        = string
+  default     = "motoshop"
 }

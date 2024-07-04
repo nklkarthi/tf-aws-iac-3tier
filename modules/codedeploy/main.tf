@@ -8,19 +8,24 @@ resource "aws_codedeploy_deployment_group" "deployment_group" {
   service_role_arn      = var.service_role_arn
 
   deployment_style {
-    deployment_type = "IN_PLACE"
+    deployment_type   = "IN_PLACE"
     deployment_option = "WITH_TRAFFIC_CONTROL"
   }
 
-  ec2_tag_filter {
-    key   = var.ec2_tag_key
-    value = var.ec2_tag_value
-    type  = "KEY_AND_VALUE"
+  ec2_tag_set {
+    ec2_tag_filter {
+      key   = var.ec2_tag_key
+      value = var.ec2_tag_value
+      type  = "KEY_AND_VALUE"
+    }
   }
 
   load_balancer_info {
+    elb_info {
+      name = var.alb_name
+    }
     target_group_info {
-      name = aws_lb_target_group.frontend.name
+      name = var.target_group_arn
     }
   }
 }
